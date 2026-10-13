@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function() {
+        try {
+          var _fetch = typeof window.fetch === 'function' ? window.fetch.bind(window) : null;
+          Object.defineProperty(window, 'fetch', {
+            get: function() {
+              return _fetch;
+            },
+            set: function(fn) {
+              _fetch = fn;
+            },
+            configurable: true,
+            enumerable: true,
+          });
+        } catch (e) {
+          try {
+            if (typeof Window !== 'undefined' && Window.prototype) {
+              var _protoFetch = window.fetch;
+              Object.defineProperty(Window.prototype, 'fetch', {
+                get: function() {
+                  return _protoFetch;
+                },
+                set: function(fn) {
+                  _protoFetch = fn;
+                },
+                configurable: true,
+                enumerable: true,
+              });
+            }
+          } catch (err) {}
+        }
+      })();
+    </script>
+    <title>Carveco Bit Studio - Tool Database (.tbd / .tdb) Bulk Editor</title>
+    <meta name="description" content="Bulk edit and calibrate Carveco & ArtCAM .tbd / .tdb tool databases for 710W spindles, custom CNC feeds & speeds, and individual tool bit settings." />
+    <meta property="og:title" content="Carveco Bit Studio - Tool Database Bulk Editor" />
+    <meta property="og:description" content="Bulk edit and calibrate Carveco & ArtCAM .tbd / .tdb tool databases for 710W spindles, custom CNC feeds & speeds, and individual tool bit settings." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

@@ -1,0 +1,6 @@
+{
+  "name": "Carveco Bit Studio - Tool Database Bulk Editor",
+  "description": "Interactive bulk editor and tuner for Carveco & ArtCAM .tbd / .tdb router bit databases. Easily scale spindle speeds, feed rates, stepdowns for 710W spindles and customize CNC toolpaths.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
