@@ -1,10 +1,11 @@
 export type ToolType =
   | 'endmill'
   | 'ballnose'
+  | 'conical' // Tapered Ball Nose
   | 'vbit'
-  | 'conical'
-  | 'radiused'
   | 'engraving'
+  | 'bowl_tray' // Round Bowl & Tray bit
+  | 'radiused' // Bull Nose / Corner Radius
   | 'surfacing'
   | 'roundover'
   | 'drill'
@@ -17,6 +18,12 @@ export interface OriginalToolValues {
   spindleSpeed: number;
   feedRate: number;
   plungeRate: number;
+  stepover?: number;
+  stepoverPercent?: number;
+  tipSize?: number;
+  angle?: number;
+  fluteLength?: number;
+  shankDiameter?: number;
   name?: string;
   notes?: string;
 }
@@ -31,6 +38,16 @@ export interface CarvecoTool {
   unit: 'mm' | 'inch';
   diameter: number;
   param2: number; // Stepover or tip radius or angle depending on bit geometry
+
+  // Dedicated Carveco Geometry & Tool Settings
+  tipSize?: number; // Tip size: Flat diameter (w) for engraving/flat V-bits, or Tip radius (r) for tapered ball nose & bullnose
+  angle?: number; // Included angle (degrees) for V-bit/engraving, or half-angle for tapered bits
+  stepover?: number; // Stepover distance (in bit unit: mm or inches)
+  stepoverPercent?: number; // Stepover as percentage of diameter (e.g., 40% for endmills, 8-10% for 3D relief carving)
+  fluteLength?: number; // Flute / Cutting edge length (mm or inches)
+  shankDiameter?: number; // Shank collet diameter (e.g., 3.175mm, 6.35mm, 1/8", 1/4")
+  materialGroup?: string; // Material profile (Wood, Aluminum, Plastics/Acrylic, MDF, etc.)
+
   stepdown: number;
   spindleSpeed: number; // RPM
   feedRate: number;
@@ -62,6 +79,10 @@ export type BulkField =
   | 'plungeRate'
   | 'stepdown'
   | 'param2'
+  | 'stepover'
+  | 'stepoverPercent'
+  | 'tipSize'
+  | 'angle'
   | 'diameter'
   | 'toolNo';
 

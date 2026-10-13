@@ -20,6 +20,7 @@ import {
   snapToNearestDial,
   calculatePowerScalingFactors,
 } from '../utils/spindleProfiles';
+import { GENMITSU_MACHINES, GenmitsuMachine } from '../utils/genmitsuProfiles';
 
 interface SpindleTunerBarProps {
   tools: CarvecoTool[];
@@ -198,6 +199,52 @@ export const SpindleTunerBar: React.FC<SpindleTunerBarProps> = ({
         setSnapDial(true);
         break;
     }
+  };
+
+  const [selectedMachineId, setSelectedMachineId] = useState<string | null>(
+    isLikelyStockDesktop ? 'genmitsu-3018-pro' : null
+  );
+
+  const handleSelectGenmitsuMachine = (machineId: string) => {
+    setSelectedMachineId(machineId);
+    const m = GENMITSU_MACHINES.find(x => x.id === machineId);
+    if (!m) return;
+
+    if (m.series === '3018') {
+      setSourceBaselineWatts(100);
+      setSelectedProfileId('genmitsu-775');
+      setFeedMultiplier(1.0);
+      setStepdownMultiplier(1.0);
+      setPlungeMultiplier(1.0);
+      setRpmMultiplier(1.0);
+      setTuneMode('upgrade_from_stock');
+    } else if (m.series === '3020') {
+      setSourceBaselineWatts(100);
+      setSelectedProfileId('brushless-500w');
+      setFeedMultiplier(1.5);
+      setStepdownMultiplier(1.4);
+      setPlungeMultiplier(1.3);
+      setRpmMultiplier(1.2);
+      setTuneMode('upgrade_from_stock');
+    } else if (m.series === '4040') {
+      setSourceBaselineWatts(100);
+      setSelectedProfileId('makita-710w');
+      setFeedMultiplier(2.1);
+      setStepdownMultiplier(1.9);
+      setPlungeMultiplier(1.6);
+      setRpmMultiplier(1.5);
+      setTuneMode('upgrade_from_stock');
+    } else {
+      setSourceBaselineWatts(100);
+      setSelectedProfileId('makita-710w');
+      setFeedMultiplier(2.4);
+      setStepdownMultiplier(2.2);
+      setPlungeMultiplier(1.8);
+      setRpmMultiplier(1.6);
+      setTuneMode('upgrade_from_stock');
+    }
+    setClampRpm(true);
+    setSnapDial(true);
   };
 
   const handleApply = () => {
@@ -419,6 +466,37 @@ export const SpindleTunerBar: React.FC<SpindleTunerBarProps> = ({
                   )}
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Genmitsu Machine Presets Selector */}
+          <div className="bg-emerald-950/20 border border-emerald-900/60 rounded-lg p-3 space-y-2">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1.5 text-xs font-semibold text-emerald-300">
+                <Cpu className="h-4 w-4 text-emerald-400" />
+                <span>Genmitsu CNC Machine Presets & Rigidity Limits:</span>
+              </div>
+              <span className="text-[10px] text-emerald-400/90 font-mono">
+                Auto-configures feed caps & pass depth limits
+              </span>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-1.5 text-xs">
+              {GENMITSU_MACHINES.map(m => (
+                <button
+                  key={m.id}
+                  type="button"
+                  onClick={() => handleSelectGenmitsuMachine(m.id)}
+                  className={`py-2 px-2.5 rounded border text-left transition-all ${
+                    selectedMachineId === m.id
+                      ? 'border-emerald-500 bg-emerald-950/60 text-emerald-200 font-bold shadow-xs'
+                      : 'border-zinc-800 bg-zinc-900/80 text-zinc-300 hover:border-emerald-800 hover:text-emerald-300'
+                  }`}
+                >
+                  <div className="font-semibold text-xs leading-tight">{m.shortName}</div>
+                  <div className="text-[10px] text-zinc-400 font-mono mt-0.5">{m.workArea}</div>
+                  <div className="text-[9px] text-emerald-400/80 mt-0.5">Max {m.maxFeedMmMin} mm/min</div>
+                </button>
+              ))}
             </div>
           </div>
 

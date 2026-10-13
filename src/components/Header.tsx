@@ -11,6 +11,7 @@ import {
   ChevronDown,
   Layers,
   HelpCircle,
+  Cpu,
 } from 'lucide-react';
 import { DatabaseState } from '../types/tool';
 import { BRAND_PRESETS } from '../data/presetDatabases';
@@ -228,6 +229,18 @@ export const Header: React.FC<HeaderProps> = ({
                 </div>
               )}
             </div>
+          )}
+
+          {/* Genmitsu Official Library Quick Trigger */}
+          {onLoadBrandPreset && (
+            <button
+              onClick={() => onLoadBrandPreset('genmitsu')}
+              className="flex items-center gap-1.5 rounded-md border border-emerald-800/80 bg-emerald-950/40 px-2.5 py-1.5 text-xs font-semibold text-emerald-300 hover:bg-emerald-900/60 hover:text-emerald-100 transition-colors shadow-xs"
+              title="Load official Genmitsu 28-bit catalog (Nano Blue, TiN, Ball Nose, V-Bits, O-Flutes, Surfacing)"
+            >
+              <Cpu className="h-3.5 w-3.5 text-emerald-400" />
+              <span>Genmitsu Bits (28)</span>
+            </button>
           )}
 
           {/* 710W Quick Tuner Trigger */}

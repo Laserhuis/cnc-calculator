@@ -664,11 +664,35 @@ export const ToolTable: React.FC<ToolTableProps> = ({
                           )}
                         </div>
 
-                        {/* Quiet unboxed metadata */}
-                        <div className="flex items-center gap-2 text-[11px] text-zinc-500 mt-0.5">
+                        {/* Quiet unboxed metadata with Carveco Geometry callouts */}
+                        <div className="flex flex-wrap items-center gap-2 text-[11px] text-zinc-500 mt-0.5">
                           <span>{tool.group}</span>
                           <span aria-hidden="true">·</span>
                           <span className="capitalize">{tool.toolType}</span>
+                          {tool.tipSize !== undefined && (
+                            <>
+                              <span aria-hidden="true">·</span>
+                              <span className="text-amber-400 font-mono font-medium" title="Carveco Tip Size / Flat Width / Radius">
+                                Tip: {tool.tipSize}{isMetric ? 'mm' : '"'}
+                              </span>
+                            </>
+                          )}
+                          {tool.angle !== undefined && (
+                            <>
+                              <span aria-hidden="true">·</span>
+                              <span className="text-amber-400 font-mono font-medium" title="Included or Taper Angle">
+                                {tool.angle}°
+                              </span>
+                            </>
+                          )}
+                          {tool.stepoverPercent !== undefined && (
+                            <>
+                              <span aria-hidden="true">·</span>
+                              <span className="text-zinc-400 font-mono" title="Stepover (% of Tool Diameter)">
+                                Stepover: {tool.stepoverPercent}%
+                              </span>
+                            </>
+                          )}
                           <span aria-hidden="true">·</span>
                           <span>{tool.fluteCount} flute</span>
                           <span aria-hidden="true">·</span>

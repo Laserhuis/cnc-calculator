@@ -192,7 +192,11 @@ export const BulkModifierModal: React.FC<BulkModifierModalProps> = ({
                   <option value="feedRate">Feed Rate (Cutting Speed)</option>
                   <option value="plungeRate">Plunge Rate (Z-Axis Feed)</option>
                   <option value="stepdown">Stepdown (Pass Depth)</option>
-                  <option value="param2">Stepover / Angle (Param 2)</option>
+                  <option value="stepoverPercent">Stepover % of Tool Diameter</option>
+                  <option value="stepover">Stepover Distance</option>
+                  <option value="tipSize">Tip Size / Flat Width / Radius</option>
+                  <option value="angle">Included / Taper Angle (°)</option>
+                  <option value="param2">Param 2 (Binary Fallback)</option>
                   <option value="diameter">Tool Diameter</option>
                   <option value="toolNo">Tool Number</option>
                 </select>

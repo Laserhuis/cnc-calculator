@@ -21,10 +21,16 @@ import {
   Package,
   ArrowRight,
   ShieldAlert,
+  Cpu,
+  Globe,
+  Terminal,
+  Compass,
 } from 'lucide-react';
 
 export type HelpTabId =
   | 'quickstart'
+  | 'genmitsu_guide'
+  | 'website_embed'
   | 'spindle_physics'
   | 'calculator'
   | 'unit_discrepancy'
@@ -118,6 +124,8 @@ export const HelpAssistanceModal: React.FC<HelpAssistanceModalProps> = ({
 
   const navigationItems = [
     { id: 'quickstart', label: 'Quick Start & Workflow', icon: Zap, category: 'Fundamentals' },
+    { id: 'genmitsu_guide', label: 'Genmitsu CNC & SainSmart Hub', icon: Cpu, category: 'Sponsor & Machines' },
+    { id: 'website_embed', label: 'Website & Vercel Integration', icon: Globe, category: 'Integration & Deployment' },
     { id: 'spindle_physics', label: '710W & Spindle Physics', icon: Gauge, category: 'Fundamentals' },
     { id: 'calculator', label: 'Live Chip Load Calculator', icon: Calculator, category: 'Tools' },
     { id: 'unit_discrepancy', label: 'Units & The 25.4 Fix', icon: RefreshCw, category: 'Troubleshooting' },
@@ -356,6 +364,304 @@ export const HelpAssistanceModal: React.FC<HelpAssistanceModalProps> = ({
                       </p>
                     </div>
                   </div>
+                </div>
+              </div>
+            )}
+
+            {/* GENMITSU CNC & SAINSMART ECOSYSTEM HUB */}
+            {activeTab === 'genmitsu_guide' && (
+              <div className="space-y-6 max-w-4xl">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-xl font-bold tracking-tight text-emerald-300 flex items-center gap-2">
+                      <Cpu className="h-5 w-5 text-emerald-400" />
+                      Genmitsu & SainSmart CNC Ecosystem Hub
+                    </h3>
+                    <span className="text-[10px] bg-emerald-950/80 text-emerald-300 border border-emerald-800/80 px-2 py-0.5 rounded font-mono font-semibold">
+                      Official Partner Sponsor
+                    </span>
+                  </div>
+                  <p className="text-sm text-zinc-300 mt-1">
+                    Complete tuning, safety parameters, and tool libraries specifically calibrated for Genmitsu CNC desktop and production machines.
+                  </p>
+                </div>
+
+                {/* Genmitsu Machine Matrix */}
+                <div className="space-y-3">
+                  <h4 className="text-sm font-semibold text-zinc-200">
+                    Genmitsu Machine Specifications & Safe Axis Limits
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                    {/* 3018 Series */}
+                    <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="font-semibold text-zinc-100">Genmitsu 3018-PRO & PROVer</span>
+                        <span className="font-mono text-emerald-400 text-[10px] bg-zinc-950 px-2 py-0.5 rounded border border-zinc-800">
+                          Stock 775 Motor
+                        </span>
+                      </div>
+                      <p className="text-zinc-400 text-[11px] leading-relaxed">
+                        Work Area: <strong className="text-zinc-200">300 × 180 × 45 mm</strong>. Stock 775 DC motor runs at 10,000 RPM with ~60–100W electrical input.
+                      </p>
+                      <div className="bg-zinc-950 p-2.5 rounded border border-zinc-850 space-y-1 text-[11px]">
+                        <div className="flex justify-between text-zinc-300">
+                          <span>Max Safe Feed:</span>
+                          <span className="font-mono text-amber-400">1,000 mm/min (39 IPM)</span>
+                        </div>
+                        <div className="flex justify-between text-zinc-300">
+                          <span>Max Pass Depth (Wood):</span>
+                          <span className="font-mono text-amber-400">0.5 – 0.8 mm</span>
+                        </div>
+                        <div className="flex justify-between text-zinc-300">
+                          <span>Max Pass Depth (PCB/Acrylic):</span>
+                          <span className="font-mono text-amber-400">0.2 – 0.4 mm</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 3020-PRO MAX */}
+                    <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="font-semibold text-zinc-100">Genmitsu 3020-PRO MAX</span>
+                        <span className="font-mono text-emerald-400 text-[10px] bg-zinc-950 px-2 py-0.5 rounded border border-zinc-800">
+                          300W / 500W Spindle
+                        </span>
+                      </div>
+                      <p className="text-zinc-400 text-[11px] leading-relaxed">
+                        Work Area: <strong className="text-zinc-200">300 × 200 × 73 mm</strong>. Heavy-duty all-aluminum frame and ER11 quiet air-cooled spindle.
+                      </p>
+                      <div className="bg-zinc-950 p-2.5 rounded border border-zinc-850 space-y-1 text-[11px]">
+                        <div className="flex justify-between text-zinc-300">
+                          <span>Max Safe Feed:</span>
+                          <span className="font-mono text-amber-400">1,800 mm/min (71 IPM)</span>
+                        </div>
+                        <div className="flex justify-between text-zinc-300">
+                          <span>Max Pass Depth (Wood):</span>
+                          <span className="font-mono text-amber-400">1.2 – 1.8 mm</span>
+                        </div>
+                        <div className="flex justify-between text-zinc-300">
+                          <span>Max Pass Depth (Aluminum):</span>
+                          <span className="font-mono text-amber-400">0.2 – 0.4 mm (with lube)</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 4040-PRO */}
+                    <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="font-semibold text-zinc-100">Genmitsu 4040-PRO / Renaissance</span>
+                        <span className="font-mono text-emerald-400 text-[10px] bg-zinc-950 px-2 py-0.5 rounded border border-zinc-800">
+                          500W / 710W Makita
+                        </span>
+                      </div>
+                      <p className="text-zinc-400 text-[11px] leading-relaxed">
+                        Work Area: <strong className="text-zinc-200">400 × 400 × 78 mm</strong>. Dual Y-axis lead screws, high rigidity for hardwoods & soft metals.
+                      </p>
+                      <div className="bg-zinc-950 p-2.5 rounded border border-zinc-850 space-y-1 text-[11px]">
+                        <div className="flex justify-between text-zinc-300">
+                          <span>Max Safe Feed:</span>
+                          <span className="font-mono text-amber-400">2,500 mm/min (98 IPM)</span>
+                        </div>
+                        <div className="flex justify-between text-zinc-300">
+                          <span>Max Pass Depth (Wood):</span>
+                          <span className="font-mono text-amber-400">2.0 – 3.0 mm</span>
+                        </div>
+                        <div className="flex justify-between text-zinc-300">
+                          <span>Spindle Mounting:</span>
+                          <span className="font-mono text-zinc-300">52mm or 65mm router bracket</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* PROVerXL Series */}
+                    <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="font-semibold text-zinc-100">Genmitsu PROVerXL 4030 & 6060</span>
+                        <span className="font-mono text-emerald-400 text-[10px] bg-zinc-950 px-2 py-0.5 rounded border border-zinc-800">
+                          710W Trim Router / VFD
+                        </span>
+                      </div>
+                      <p className="text-zinc-400 text-[11px] leading-relaxed">
+                        Work Area: <strong className="text-zinc-200">400 × 300 mm (expandable to 6060 or 1010)</strong>. C-beam extrusion and rigid closed-loop control.
+                      </p>
+                      <div className="bg-zinc-950 p-2.5 rounded border border-zinc-850 space-y-1 text-[11px]">
+                        <div className="flex justify-between text-zinc-300">
+                          <span>Max Safe Feed:</span>
+                          <span className="font-mono text-amber-400">3,000+ mm/min (118 IPM)</span>
+                        </div>
+                        <div className="flex justify-between text-zinc-300">
+                          <span>Max Pass Depth (Wood):</span>
+                          <span className="font-mono text-amber-400">3.5 – 5.0 mm</span>
+                        </div>
+                        <div className="flex justify-between text-zinc-300">
+                          <span>Recommended Spindle:</span>
+                          <span className="font-mono text-zinc-300">Makita RT0700 / DeWalt 611</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* SainSmart / Genmitsu Tool Database Files */}
+                <div className="rounded-xl border border-emerald-900/60 bg-emerald-950/20 p-5 space-y-3">
+                  <div className="flex items-center gap-2 text-emerald-300 font-semibold text-sm">
+                    <Lightbulb className="h-4 w-4 text-emerald-400" />
+                    <span>How to use Official Genmitsu .tdb Files from the SainSmart Website</span>
+                  </div>
+                  <p className="text-xs text-zinc-300 leading-relaxed">
+                    SainSmart distributes official Carveco tool libraries: <strong className="text-zinc-100">"SainSmart Bits (Carveco_Metric).tdb"</strong> and <strong className="text-zinc-100">"SainSmart Bits (Carveco_Inches).tdb"</strong>.
+                  </p>
+                  <ul className="text-xs text-zinc-300 space-y-1.5 list-disc list-inside">
+                    <li>
+                      <strong>Direct Upload:</strong> You can upload either file directly into this applet. The parser reads all tool groups, names, cutting depths, and speeds with zero data loss.
+                    </li>
+                    <li>
+                      <strong>Instant One-Click Load:</strong> You don't even need to download the file! Simply click <strong className="text-emerald-300">"Genmitsu Bits (28)"</strong> in the header or in the Upload modal to load the complete authentic library instantly.
+                    </li>
+                    <li>
+                      <strong>Auto-Tuning for Upgrades:</strong> When running these bits on a Makita 710W router or 4040-PRO, open the Spindle Tuner and select <strong className="text-amber-300">"4040-PRO"</strong> or <strong className="text-amber-300">"Wood (1.8× Feed)"</strong> to prevent bit burning and chatter.
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Candle (GRBL) Workflow */}
+                <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 space-y-2">
+                  <h4 className="text-sm font-semibold text-zinc-100 flex items-center gap-2">
+                    <Terminal className="h-4 w-4 text-emerald-400" />
+                    Running on Candle & Universal Gcode Sender (UGS)
+                  </h4>
+                  <p className="text-xs text-zinc-400 leading-relaxed">
+                    Genmitsu machines run on open-source GRBL firmware. When exporting, click <strong className="text-zinc-200">Export &amp; Download</strong> and choose the <strong className="text-emerald-300">Candle GRBL (.nc)</strong> or <strong className="text-emerald-300">UGS Tool Table</strong> tabs to copy safe spindle start codes and tool offset headers directly into your G-code programs.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* WEBSITE & VERCEL INTEGRATION GUIDE */}
+            {activeTab === 'website_embed' && (
+              <div className="space-y-6 max-w-4xl">
+                <div>
+                  <h3 className="text-xl font-bold tracking-tight text-zinc-100 flex items-center gap-2">
+                    <Globe className="h-5 w-5 text-sky-400" />
+                    How to Integrate Carveco Bit Studio into Your Website / Vercel
+                  </h3>
+                  <p className="text-sm text-zinc-400 mt-1">
+                    Step-by-step methods to host or embed this application as a standalone page or interactive widget on your website.
+                  </p>
+                </div>
+
+                {/* Method 1: Responsive iframe */}
+                <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-5 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h4 className="text-sm font-semibold text-zinc-100 flex items-center gap-2">
+                      <span className="flex h-5 w-5 items-center justify-center rounded bg-sky-500/20 text-sky-400 text-xs font-bold">1</span>
+                      Embed via Responsive &lt;iframe&gt; (Works on Any Website / Vercel)
+                    </h4>
+                    <button
+                      type="button"
+                      onClick={() => copyToClipboard(`<div style="width: 100%; height: 100vh; min-height: 700px; border: none; border-radius: 12px; overflow: hidden;">
+  <iframe
+    src="${window.location.origin}"
+    title="Carveco Bit Studio"
+    width="100%"
+    height="100%"
+    style="border: 0; width: 100%; height: 100%; display: block;"
+    allow="clipboard-read; clipboard-write"
+    loading="lazy"
+  ></iframe>
+</div>`, 'iframe-snippet')}
+                      className="flex items-center gap-1 text-xs text-sky-400 hover:text-sky-300 font-mono"
+                    >
+                      {copiedSnippet === 'iframe-snippet' ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
+                      <span>{copiedSnippet === 'iframe-snippet' ? 'Copied!' : 'Copy Embed Code'}</span>
+                    </button>
+                  </div>
+                  <p className="text-xs text-zinc-400 leading-relaxed">
+                    Paste this HTML code directly into any webpage, Next.js page, WordPress block, Webflow custom embed, or Shopify page:
+                  </p>
+                  <pre className="bg-zinc-950 border border-zinc-850 p-3 rounded-lg text-[11px] font-mono text-zinc-300 overflow-x-auto">
+{`<div style="width: 100%; height: 100vh; min-height: 700px; border: none; border-radius: 12px; overflow: hidden;">
+  <iframe
+    src="${typeof window !== 'undefined' ? window.location.origin : 'https://your-applet-url.run.app'}"
+    title="Carveco Bit Studio"
+    width="100%"
+    height="100%"
+    style="border: 0; width: 100%; height: 100%; display: block;"
+    allow="clipboard-read; clipboard-write"
+    loading="lazy"
+  ></iframe>
+</div>`}
+                  </pre>
+                </div>
+
+                {/* Method 2: Next.js / React Route on Vercel */}
+                <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-5 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h4 className="text-sm font-semibold text-zinc-100 flex items-center gap-2">
+                      <span className="flex h-5 w-5 items-center justify-center rounded bg-amber-500/20 text-amber-400 text-xs font-bold">2</span>
+                      Next.js App Router Page (e.g. your-website.vercel.app/tools)
+                    </h4>
+                    <button
+                      type="button"
+                      onClick={() => copyToClipboard(`// app/tools/page.tsx
+export const metadata = {
+  title: 'Carveco Bit Studio - Tool Database Bulk Editor',
+  description: 'Calibrate speeds, feeds, and 710W router settings',
+};
+
+export default function ToolsPage() {
+  return (
+    <main className="w-full h-screen bg-zinc-950">
+      <iframe
+        src="${window.location.origin}"
+        className="w-full h-full border-0"
+        title="Carveco Bit Studio"
+        allow="clipboard-read; clipboard-write"
+      />
+    </main>
+  );
+}`, 'nextjs-snippet')}
+                      className="flex items-center gap-1 text-xs text-amber-400 hover:text-amber-300 font-mono"
+                    >
+                      {copiedSnippet === 'nextjs-snippet' ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
+                      <span>{copiedSnippet === 'nextjs-snippet' ? 'Copied!' : 'Copy Next.js Code'}</span>
+                    </button>
+                  </div>
+                  <p className="text-xs text-zinc-400 leading-relaxed">
+                    In your Next.js Vercel project, create a file at <code className="text-amber-300 font-mono">app/tools/page.tsx</code>:
+                  </p>
+                  <pre className="bg-zinc-950 border border-zinc-850 p-3 rounded-lg text-[11px] font-mono text-zinc-300 overflow-x-auto">
+{`// app/tools/page.tsx
+export default function ToolsPage() {
+  return (
+    <div className="w-full h-[calc(100vh-64px)] min-h-[750px]">
+      <iframe
+        src="${typeof window !== 'undefined' ? window.location.origin : 'https://your-applet-url.run.app'}"
+        className="w-full h-full border-0 rounded-lg shadow-xl"
+        title="Carveco Bit Studio"
+        allow="clipboard-read; clipboard-write"
+      />
+    </div>
+  );
+}`}
+                  </pre>
+                </div>
+
+                {/* Method 3: Direct Standalone Deployment to Vercel */}
+                <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-5 space-y-2">
+                  <h4 className="text-sm font-semibold text-zinc-100 flex items-center gap-2">
+                    <span className="flex h-5 w-5 items-center justify-center rounded bg-emerald-500/20 text-emerald-400 text-xs font-bold">3</span>
+                    Deploy Directly as its Own Vercel Subdomain
+                  </h4>
+                  <p className="text-xs text-zinc-300 leading-relaxed">
+                    Because this app is a standard Vite + React SPA, you can also deploy it directly to Vercel with zero config:
+                  </p>
+                  <ol className="text-xs text-zinc-300 space-y-1 list-decimal list-inside bg-zinc-950 p-3 rounded-lg border border-zinc-850">
+                    <li>Push the project to your GitHub repository.</li>
+                    <li>Go to <strong className="text-zinc-100">Vercel.com &gt; Add New Project</strong>.</li>
+                    <li>Select your repository. Vercel automatically detects <strong className="text-zinc-100">Vite</strong> and configures <code className="text-amber-300 font-mono">npm run build</code> and the <code className="text-amber-300 font-mono">dist</code> directory.</li>
+                    <li>Click <strong className="text-emerald-400 font-semibold">Deploy</strong>. Your applet is live instantly on your custom Vercel domain!</li>
+                  </ol>
                 </div>
               </div>
             )}
@@ -761,6 +1067,50 @@ export const HelpAssistanceModal: React.FC<HelpAssistanceModalProps> = ({
                       <li>Select your downloaded <span className="font-mono text-zinc-200">.tdb</span> file and click Open.</li>
                       <li>All groups, cutting depths, and speeds will immediately appear in your tool tree.</li>
                     </ol>
+
+                    {/* Carveco Tool Settings Demystified */}
+                    <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-950 p-3.5 space-y-2.5">
+                      <h5 className="text-xs font-semibold text-amber-300 flex items-center gap-1.5">
+                        <Compass className="h-4 w-4" />
+                        Carveco Tool Settings & Geometry Breakdown
+                      </h5>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-[11px] text-zinc-300">
+                        <div className="bg-zinc-900/80 p-2.5 rounded border border-zinc-800 space-y-1">
+                          <span className="font-semibold text-amber-400 block">1. Tip Size & Tip Radius (w / r)</span>
+                          <p className="text-zinc-400 leading-relaxed">
+                            • <strong>Engraving & Flat V-Bits:</strong> Tip Size (<code className="text-zinc-200">w</code>) is the flat flat-spot width at the point (e.g. 0.1mm, 0.2mm, 0.005"). Carveco calculates V-carve plunge depths and tool offsets from this dimension.<br />
+                            • <strong>Conical / Tapered Ball Nose:</strong> Tip Radius (<code className="text-zinc-200">r</code>) is the ball radius at the apex (e.g. R0.5mm, R0.25mm) used for smooth 3D relief contours.<br />
+                            • <strong>Ball Nose:</strong> Exactly equals half cutter diameter (<code className="text-zinc-200">D/2</code>).<br />
+                            • <strong>Bull Nose:</strong> Corner radius (<code className="text-zinc-200">r</code>) for smooth bottom fillet edges.
+                          </p>
+                        </div>
+
+                        <div className="bg-zinc-900/80 p-2.5 rounded border border-zinc-800 space-y-1">
+                          <span className="font-semibold text-amber-400 block">2. Stepover (Distance & % of D)</span>
+                          <p className="text-zinc-400 leading-relaxed">
+                            • <strong>8% - 10%:</strong> High-resolution 3D relief finishing (virtually eliminates scallop ridge lines).<br />
+                            • <strong>40%:</strong> Carveco default clearing & pocketing pass stepover.<br />
+                            • <strong>50% - 75%:</strong> Rapid roughing passes in softer woods.<br />
+                            In Bit Studio, editing either distance or % automatically updates the other.
+                          </p>
+                        </div>
+
+                        <div className="bg-zinc-900/80 p-2.5 rounded border border-zinc-800 space-y-1">
+                          <span className="font-semibold text-amber-400 block">3. Included Angle & Taper Angle</span>
+                          <p className="text-zinc-400 leading-relaxed">
+                            • <strong>V-Bits:</strong> 60° (standard fine text), 90° (bold bevels), 15°/30° (ultra-fine PCB and metal engraving).<br />
+                            • <strong>Conical bits:</strong> 3.82° or 5.4° side half-angle for deep 3D carving clearance without cutter deflection.
+                          </p>
+                        </div>
+
+                        <div className="bg-zinc-900/80 p-2.5 rounded border border-zinc-800 space-y-1">
+                          <span className="font-semibold text-amber-400 block">4. Material Strategies & Units</span>
+                          <p className="text-zinc-400 leading-relaxed">
+                            Carveco associates speeds and feeds with Material Profiles (Hardwood, Softwood, Acrylic, Aluminum). Each bit can have distinct feed units (mm/min, mm/sec, in/min) and plunge units configured.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Inventables Easel */}
@@ -867,13 +1217,18 @@ export const HelpAssistanceModal: React.FC<HelpAssistanceModalProps> = ({
                     </p>
                   </div>
 
-                  <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 space-y-2">
+                  <div className="rounded-xl border border-emerald-900/60 bg-emerald-950/20 p-4 space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-semibold text-zinc-100">Genmitsu / SainSmart</span>
-                      <span className="text-xs font-mono text-amber-400">Standard 3018 Pack</span>
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-sm font-semibold text-emerald-300">Genmitsu (SainSmart)</span>
+                        <span className="text-[10px] bg-emerald-900/60 text-emerald-300 border border-emerald-800 px-1.5 py-0.2 rounded font-mono">
+                          Partner Sponsor
+                        </span>
+                      </div>
+                      <span className="text-xs font-mono text-emerald-400 font-bold">28 Bits</span>
                     </div>
-                    <p className="text-xs text-zinc-400">
-                      Metric bits (1/8" shank, 3.175mm, 4mm, 6mm) with factory stock 775 baseline values, ideal for 1-click wattage upgrading.
+                    <p className="text-xs text-zinc-300">
+                      Comprehensive official catalog: Nano Blue 2F/4F flat end mills (0.8–6mm), TiN cutters, 3D relief ball nose (R0.5–R3.0), 20°/30°/60°/90° V-bits, single-flute O-flutes (plastics & aluminum), compression bits, surfacing fly cutters, and PCB corn teeth!
                     </p>
                   </div>
 
@@ -1038,6 +1393,26 @@ export const HelpAssistanceModal: React.FC<HelpAssistanceModalProps> = ({
                     </p>
                     <div className="bg-zinc-950 p-3 rounded text-xs text-amber-300 border border-zinc-850">
                       <strong className="text-zinc-200">Action:</strong> Switch to a single-flute <strong className="text-sky-300">O-Flute upcut bit</strong>, set router to Dial 1 or 2 (10,000–12,000 RPM), and maintain a brisk feed rate.
+                    </div>
+                  </div>
+
+                  {/* Issue 5: Upload File Failure */}
+                  <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 space-y-2">
+                    <div className="flex items-center gap-2 text-sm font-semibold text-emerald-300">
+                      <AlertTriangle className="h-4 w-4" />
+                      File Upload Error ("No valid CNC tool entries found")
+                    </div>
+                    <p className="text-xs text-zinc-300 leading-relaxed">
+                      <strong className="text-zinc-100">Root Cause:</strong> European Excel CSVs often use semicolons (<code className="text-amber-300 font-mono">;</code>) rather than commas, or numbers use comma decimals (<code className="text-amber-300 font-mono">3,175</code>). Or a file contains non-standard headers.
+                    </p>
+                    <div className="bg-zinc-950 p-3 rounded text-xs text-emerald-300 border border-zinc-850 space-y-1">
+                      <p><strong className="text-zinc-200">How to solve:</strong></p>
+                      <ul className="list-disc list-inside space-y-0.5 text-zinc-300">
+                        <li>Carveco Bit Studio now automatically detects semicolon delimiters and comma decimals!</li>
+                        <li>If your file still gives an error, open it in Notepad or Excel, copy the text, and use the <strong>Paste CSV / Text</strong> tab in the Upload dialog.</li>
+                        <li>Ensure at least Tool Name and Diameter are present on each row.</li>
+                        <li>You can also click <strong>Genmitsu Bits (28)</strong> in the top header to load the complete pre-calibrated official library immediately.</li>
+                      </ul>
                     </div>
                   </div>
                 </div>

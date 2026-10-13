@@ -7,6 +7,7 @@ import { ToolDetailModal } from './components/ToolDetailModal';
 import { UploadModal } from './components/UploadModal';
 import { ExportModal } from './components/ExportModal';
 import { PrintCheatsheetModal } from './components/PrintCheatsheetModal';
+import { AddToolModal } from './components/AddToolModal';
 import { HelpAssistanceModal, HelpTabId } from './components/HelpAssistanceModal';
 import { CarvecoTool, DatabaseState, BulkOperationConfig } from './types/tool';
 import { WHITESIDE_PRESET, BRAND_PRESETS } from './data/presetDatabases';
@@ -46,6 +47,7 @@ export default function App() {
   const [isPrintOpen, setIsPrintOpen] = useState(false);
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [helpTab, setHelpTab] = useState<HelpTabId>('quickstart');
+  const [isAddToolOpen, setIsAddToolOpen] = useState(false);
   const [activeDetailTool, setActiveDetailTool] = useState<CarvecoTool | null>(null);
 
   const openHelpWithTab = (tab: HelpTabId) => {
@@ -477,37 +479,13 @@ export default function App() {
     pushHistory(updatedTools);
   };
 
-  // Add new tool
+  // Add new tool (opens Bit Wizard)
   const handleAddNewTool = () => {
-    const isDefaultMetric = unitMode === 'metric';
-    const newTool: CarvecoTool = {
-      id: `tool-${Date.now()}`,
-      name: isDefaultMetric ? 'Custom 6mm End Mill' : 'Custom 1/4" End Mill',
-      group: activeGroup !== 'all' ? activeGroup : 'Custom Bits',
-      notes: 'Custom bit settings calibrated for 710W trim router.',
-      toolNo: database.tools.length + 1,
-      unitFlag: isDefaultMetric ? 1 : 0,
-      unit: isDefaultMetric ? 'mm' : 'inch',
-      diameter: isDefaultMetric ? 6.0 : 0.25,
-      param2: isDefaultMetric ? 2.5 : 0.1,
-      stepdown: isDefaultMetric ? 3.0 : 0.125,
-      spindleSpeed: 17000,
-      feedRate: isDefaultMetric ? 2000 : 100,
-      plungeRate: isDefaultMetric ? 500 : 25,
-      feedUnit: isDefaultMetric ? 2 : 4,
-      plungeUnit: isDefaultMetric ? 2 : 3,
-      toolType: 'endmill',
-      fluteCount: 2,
-      originalValues: {
-        diameter: isDefaultMetric ? 6.0 : 0.25,
-        param2: isDefaultMetric ? 2.5 : 0.1,
-        stepdown: isDefaultMetric ? 3.0 : 0.125,
-        spindleSpeed: 17000,
-        feedRate: isDefaultMetric ? 2000 : 100,
-        plungeRate: isDefaultMetric ? 500 : 25,
-      },
-    };
+    setIsAddToolOpen(true);
+  };
 
+  const handleCreateToolFromWizard = (newTool: CarvecoTool) => {
+    newTool.toolNo = database.tools.length + 1;
     const updatedTools = [newTool, ...database.tools];
     pushHistory(updatedTools);
     setActiveDetailTool(newTool);
@@ -656,6 +634,16 @@ export default function App() {
         onClose={() => setIsPrintOpen(false)}
         tools={database.tools}
         fileName={database.fileName}
+        unitMode={unitMode}
+      />
+
+      {/* Bit Geometry Creator Wizard Modal */}
+      <AddToolModal
+        isOpen={isAddToolOpen}
+        onClose={() => setIsAddToolOpen(false)}
+        onAddTool={handleCreateToolFromWizard}
+        groups={database.groups}
+        activeGroup={activeGroup}
         unitMode={unitMode}
       />
 
